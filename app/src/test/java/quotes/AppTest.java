@@ -8,14 +8,9 @@ import static org.junit.Assert.*;
 
 public class AppTest {
     @Test public void quotesTest() {
-//        "author": "Marilyn Monroe",
-//                "likes": "18651 likes",
-//                "text": " “I am good, but not an angel. I do sin, but I am not the devil. I am just a small girl in a big world trying to find someone to love.” "
+
         String testAuthor = "Marilyn Monroe";
         String testQuote = "I am good, but not an angel. I do sin, but I am not the devil. I am just a small girl in a big world trying to find someone to love.";
         String expected = String.format("Author: %s, Quote: %s", testAuthor, testQuote);
-
-
-
     }
 }
