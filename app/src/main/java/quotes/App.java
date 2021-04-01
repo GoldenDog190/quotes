@@ -10,20 +10,45 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import java.io.*;
+import java.net.MalformedURLException;
 import java.lang.reflect.Type;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Arrays;
 import java.util.List;
 
 public class App {
 
-    public static void main(String[] args) throws IOException {
-        Gson gson = new Gson();
-        File file = new File("app/src/main/resources/recentquotes.json");
-        FileReader reader = new FileReader(file);
-        Quotes[] fileString = gson.fromJson(reader, Quotes[].class);
-        int arrayLength = fileString.length;
-        int random = (int)(Math.random() * arrayLength);
-        System.out.println(fileString[random]);
 
+
+    public static void main(String[] args) throws IOException {
+
+
+        String urlString = "http://ron-swanson-quotes.herokuapp.com/v2/quotes";
+        URL swansonUrl = new URL(urlString);
+                 HttpURLConnection swansonConnection = (HttpURLConnection) swansonUrl.openConnection();
+
+                 swansonConnection.setRequestMethod("GET");
+                 System.out.println("sending requests");
+                 InputStreamReader inStreamReader = new InputStreamReader(swansonConnection.getInputStream());
+                 BufferedReader buffy = new BufferedReader(inStreamReader);
+
+                 String allMyJsonInOneLine = buffy.readLine();
+//                    System.out.println(allMyJsonInOneLine);
+                 Gson gson = new Gson();
+                String[] swansonResults = gson.fromJson(allMyJsonInOneLine, String[].class);
+                System.out.println(Arrays.toString(swansonResults));
+
+        }
+        public static void getFromJson() throws FileNotFoundException{
+            Gson gson = new Gson();
+            File file = new File("app/src/main/resources/recentquotes.json");
+            FileReader reader = new FileReader(file);
+            Quotes[] fileString = gson.fromJson(reader, Quotes[].class);
+            int arrayLength = fileString.length;
+            int random = (int)(Math.random() * arrayLength);
+            System.out.println(fileString[random]);
+        }
 
 
 
@@ -35,4 +60,4 @@ public class App {
 
 
     }
-}
+
