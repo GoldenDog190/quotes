@@ -3,33 +3,34 @@
  */
 package quotes;
 
+import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.lang.reflect.Type;
+import java.util.List;
 
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
 
     public static void main(String[] args) throws IOException {
-        System.out.println(new App().getGreeting());
         Gson gson = new Gson();
-
         File file = new File("app/src/main/resources/recentquotes.json");
-        file.createNewFile();
-        FileWriter fileWriter = new FileWriter(file);
-        gson.toJson(file, fileWriter);
-        fileWriter.close();
+        FileReader reader = new FileReader(file);
+        Quotes[] fileString = gson.fromJson(reader, Quotes[].class);
+        int arrayLength = fileString.length;
+        int random = (int)(Math.random() * arrayLength);
+        System.out.println(fileString[random]);
 
-        File file2 = new File("app/src/main/resources/recentquotes.json");
-        FileReader reader = new FileReader(file2);
-        Quotes author = gson.fromJson(reader, Quotes.class);
-        System.out.println(author);
-        System.out.println(author.quotes);
+
+
+
+
+
+
+
 
 
 

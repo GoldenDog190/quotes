@@ -1,17 +1,19 @@
 package quotes;
 
 public class Quotes {
+    public int length;
     String author;
-    String quotes;
+    String text;
 
-    public Quotes(String author, String quotes) {
+    public Quotes(String author, String text) {
         this.author = author;
-        this.quotes = quotes;
+        this.text = text;
     }
 
     public String toString(){
+//
         return String.format("Author: %s, Quote: %s",
                 author,
-                quotes);
+                text);
     }
 }
