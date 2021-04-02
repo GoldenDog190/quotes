@@ -14,7 +14,11 @@ import java.net.MalformedURLException;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class App {
@@ -38,6 +42,13 @@ public class App {
                  Gson gson = new Gson();
                 String[] swansonResults = gson.fromJson(allMyJsonInOneLine, String[].class);
                 System.out.println(Arrays.toString(swansonResults));
+                //String[] oldQuotes = gson.fromJson(String.valueOf(swansonResults), String[].class);
+
+//                InputStream in = new URL(urlString).openStream();
+                Files.write(Paths.get("app/src/main/resources/smallRecentQuotes.json"), Collections.singleton(gson.toJson(swansonResults)));
+//                Files.copy(swansonResults, Paths.get("app/src/main/resources/smallRecentQuotes.json"), StandardCopyOption.REPLACE_EXISTING);
+
+
 
         }
         public static void getFromJson() throws FileNotFoundException{
